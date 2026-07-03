@@ -130,13 +130,14 @@
         /* FILTROS */
         .filters {
             background: white;
-            padding: 1rem;
-            margin: 1rem 1rem 0 1rem;
-            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0 0 0;
+            border-radius: 0;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
+            gap: 1rem;
+            width: 100%;
         }
 
         .filter-group {
@@ -173,7 +174,7 @@
         /* CONTENT */
         .tab-content {
             display: none;
-            padding: 1rem;
+            padding: 0;
             animation: fadeIn 0.3s ease-in;
         }
 
@@ -192,6 +193,7 @@
             grid-template-columns: 1fr;
             gap: 1rem;
             margin-bottom: 2rem;
+            padding: 1rem;
         }
 
         @media (min-width: 640px) {
@@ -1016,7 +1018,7 @@
             {
                 id: 11,
                 name: "Pradera de Pineta",
-                type: "Cascadas",
+                type: "Valle",
                 icon: "🌄",
                 distancia: "5.3 km",
                 duracion: "1h 13 min",
@@ -1703,7 +1705,14 @@
         }
 
         function crearPueblos() {
-            const html = pueblos.map(p => `
+            // Ordenar pueblos por distancia (extrayendo número de minutos)
+            const pueblosOrdenados = [...pueblos].sort((a, b) => {
+                const distA = parseInt(a.distancia);
+                const distB = parseInt(b.distancia);
+                return distA - distB;
+            });
+
+            const html = pueblosOrdenados.map(p => `
                 <div class="card">
                     <div class="card-header">
                         <div class="card-icon">${p.icon}</div>
@@ -1725,7 +1734,16 @@
         }
 
         function crearGastronomia() {
-            const html = restaurantes.map(r => `
+            // Ordenar restaurantes por distancia (extrayendo número de minutos)
+            const restaurantesOrdenados = [...restaurantes].sort((a, b) => {
+                const distA = parseInt(a.distancia);
+                const distB = parseInt(b.distancia);
+                if (isNaN(distA)) return 1; // Aproximados al final
+                if (isNaN(distB)) return -1;
+                return distA - distB;
+            });
+
+            const html = restaurantesOrdenados.map(r => `
                 <div class="card" style="margin-bottom: 1rem; background: white;">
                     <div class="card-header" style="min-height: auto; padding: 1rem;">
                         <div style="display: flex; align-items: center; gap: 0.5rem; justify-content: center; width: 100%;">
