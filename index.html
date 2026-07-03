@@ -171,6 +171,84 @@
             padding-right: 2rem;
         }
 
+        .filters-single {
+            grid-template-columns: 1fr;
+            max-width: 320px;
+        }
+
+        /* LOCATION BAR */
+        .location-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .location-refresh-btn {
+            background: white;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .location-refresh-btn:active {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* ALERT BOXES (unifica avisos/emergencia) */
+        .alert-box {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            border-left: 4px solid;
+        }
+
+        .alert-box p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .alert-box p.alert-title {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .alert-warning {
+            background: #FFF3CD;
+            border-left-color: #F39C12;
+        }
+
+        .alert-warning p.alert-title {
+            color: #856404;
+        }
+
+        .alert-warning p {
+            color: #6B5300;
+        }
+
+        .alert-danger {
+            background: #FEE;
+            border-left-color: #E74C3C;
+        }
+
+        .alert-danger p.alert-title {
+            color: #C0392B;
+        }
+
+        .alert-danger .alert-number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #C0392B;
+        }
+
         /* CONTENT */
         .tab-content {
             display: none;
@@ -654,7 +732,7 @@
 
         <!-- LOCATION INFO -->
         <div class="location-info" id="locationInfo">
-            📍 Detectando tu ubicación...
+            <span id="locationText">📍 Obteniendo tu ubicación...</span>
         </div>
 
         <!-- TABS -->
@@ -715,10 +793,10 @@
 
         <!-- PUEBLOS TAB -->
         <div id="pueblos" class="tab-content">
-            <div style="background: white; padding: 1.5rem; margin-bottom: 1rem; display: flex; gap: 1rem;">
-                <div style="flex: 1;">
-                    <label style="font-size: 0.75rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 0.4rem;">Ordenar pueblos</label>
-                    <select id="ordenPueblos" onchange="crearPueblos()" style="padding: 0.6rem; border: 1px solid #ddd; border-radius: 6px; width: 100%;">
+            <div class="filters filters-single">
+                <div class="filter-group">
+                    <label>Ordenar pueblos</label>
+                    <select id="ordenPueblos" onchange="crearPueblos()">
                         <option value="cerca">Más cercanos</option>
                         <option value="lejos">Más lejanos</option>
                     </select>
@@ -729,10 +807,10 @@
 
         <!-- GASTRONOMÍA TAB -->
         <div id="gastronomia" class="tab-content">
-            <div style="background: white; padding: 1.5rem; margin-bottom: 1rem; display: flex; gap: 1rem;">
-                <div style="flex: 1;">
-                    <label style="font-size: 0.75rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 0.4rem;">Ordenar restaurantes</label>
-                    <select id="ordenRestaurantes" onchange="crearGastronomia()" style="padding: 0.6rem; border: 1px solid #ddd; border-radius: 6px; width: 100%;">
+            <div class="filters filters-single">
+                <div class="filter-group">
+                    <label>Ordenar restaurantes</label>
+                    <select id="ordenRestaurantes" onchange="crearGastronomia()">
                         <option value="cerca">Más cercanos</option>
                         <option value="lejos">Más lejanos</option>
                         <option value="valoracion">Mejor valorados</option>
@@ -785,27 +863,27 @@
                 </div>
 
                 <div class="practica-section" style="margin-top: 1.5rem;">
-                    <h3 style="color: #E74C3C;">📞 Emergencias Generales</h3>
-                    <div style="background: #FEE; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                        <p style="margin: 0; font-size: 1.2rem; font-weight: 700; color: #C0392B;">112</p>
-                        <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #333;">Policía, Bomberos, Ambulancia</p>
+                    <h3>📞 Emergencias Generales</h3>
+                    <div class="alert-box alert-danger">
+                        <p class="alert-number">112</p>
+                        <p>Policía, Bomberos, Ambulancia</p>
                     </div>
                 </div>
 
                 <div class="practica-section">
-                    <h3 style="color: #E74C3C;">🏥 Hospitales Cercanos</h3>
+                    <h3>🏥 Hospitales Cercanos</h3>
                     <p><strong>Hospital de Barbastro:</strong> +34 974 70 74 00 (80 km, ~1h)</p>
                     <p><strong>Centro de Salud Bielsa:</strong> +34 974 50 10 86 (11 km, ~15 min)</p>
                 </div>
 
                 <div class="practica-section">
-                    <h3 style="color: #E74C3C;">🚁 Rescate en Montaña</h3>
+                    <h3>🚁 Rescate en Montaña</h3>
                     <p><strong>Protección Civil Huesca:</strong> +34 974 22 77 00</p>
                     <p><strong>Guardia Civil (Bielsa):</strong> +34 974 50 10 04</p>
                 </div>
 
                 <div class="practica-section">
-                    <h3 style="color: #E74C3C;">💡 Consejos de Seguridad</h3>
+                    <h3>💡 Consejos de Seguridad</h3>
                     <p>✓ Avisa siempre a alguien dónde vas y cuándo vuelves</p>
                     <p>✓ Lleva móvil completamente cargado</p>
                     <p>✓ Descarga mapas offline antes de partir</p>
@@ -824,24 +902,24 @@
                 </div>
 
                 <div class="practica-section" style="margin-top: 1.5rem;">
-                    <div style="background: #FFF3CD; border-left: 4px solid #F39C12; padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
-                        <p style="margin: 0; font-weight: 700; color: #856404;">⚠️ NIEVE EN RUTAS ALTAS</p>
-                        <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #333;">Hasta julio/agosto: Balcón de Pineta, Ibón Marboré. Requieren piolet y experiencia.</p>
+                    <div class="alert-box alert-warning">
+                        <p class="alert-title">⚠️ NIEVE EN RUTAS ALTAS</p>
+                        <p>Hasta julio/agosto: Balcón de Pineta, Ibón Marboré. Requieren piolet y experiencia.</p>
                     </div>
 
-                    <div style="background: #FFF3CD; border-left: 4px solid #F39C12; padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
-                        <p style="margin: 0; font-weight: 700; color: #856404;">⚠️ TORMENTAS EN VERANO</p>
-                        <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #333;">Frecuentes por las tardes. Baja pronto si ves tormenta. Evita zonas altas.</p>
+                    <div class="alert-box alert-warning">
+                        <p class="alert-title">⚠️ TORMENTAS EN VERANO</p>
+                        <p>Frecuentes por las tardes. Baja pronto si ves tormenta. Evita zonas altas.</p>
                     </div>
 
-                    <div style="background: #FFF3CD; border-left: 4px solid #F39C12; padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
-                        <p style="margin: 0; font-weight: 700; color: #856404;">⚠️ CAMBIOS DE TEMPERATURA</p>
-                        <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #333;">Incluso en verano hay bajadas bruscas. Lleva abrigo aunque salga sol.</p>
+                    <div class="alert-box alert-warning">
+                        <p class="alert-title">⚠️ CAMBIOS DE TEMPERATURA</p>
+                        <p>Incluso en verano hay bajadas bruscas. Lleva abrigo aunque salga sol.</p>
                     </div>
 
-                    <div style="background: #FFF3CD; border-left: 4px solid #F39C12; padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
-                        <p style="margin: 0; font-weight: 700; color: #856404;">⚠️ GANADO EN LIBERTAD</p>
-                        <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #333;">Vacas y ovejas pastan. Cuidado con terneros. Mantén distancia.</p>
+                    <div class="alert-box alert-warning">
+                        <p class="alert-title">⚠️ GANADO EN LIBERTAD</p>
+                        <p>Vacas y ovejas pastan. Cuidado con terneros. Mantén distancia.</p>
                     </div>
                 </div>
 
@@ -1537,33 +1615,58 @@
         }
         function obtenerUbicacion() {
             const locationInfo = document.getElementById('locationInfo');
-            
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        userLat = position.coords.latitude;
-                        userLng = position.coords.longitude;
-                        
-                        const distanciaAlCamping = calcularDistancia(userLat, userLng, CAMPING_LAT, CAMPING_LNG);
-                        
-                        if (distanciaAlCamping < 50) {
-                            locationInfo.innerHTML = `📍 <strong>${distanciaAlCamping.toFixed(1)} km</strong> desde tu ubicación actual`;
-                        } else {
-                            locationInfo.innerHTML = `📍 ${distanciaAlCamping.toFixed(1)} km desde tu ubicación (Camping Pineta: ${(distanciaAlCamping - 1).toFixed(1)} km aproximadamente)`;
-                        }
-                        
-                        filtrarRutas();
-                    },
-                    (error) => {
-                        locationInfo.classList.add('error');
-                        locationInfo.innerHTML = `📍 Mostrando distancias desde Camping Pineta. (Activa ubicación en ajustes para distancias exactas)`;
-                        console.log('Geoloc error:', error);
-                    }
-                );
-            } else {
+            const locationText = document.getElementById('locationText');
+
+            if (!navigator.geolocation) {
                 locationInfo.classList.add('error');
-                locationInfo.innerHTML = `❌ Tu navegador no soporta geolocalización.`;
+                locationText.innerHTML = `❌ Tu navegador no soporta geolocalización.`;
+                pintarTodo();
+                return;
             }
+
+            if (window.isSecureContext === false) {
+                locationInfo.classList.add('error');
+                locationText.innerHTML = `⚠️ Abre la guía desde <strong>https://sratia.github.io/pineta</strong> (no como archivo local) para poder usar la ubicación. Mientras tanto, distancias desde Camping Pineta.`;
+                pintarTodo();
+                return;
+            }
+
+            locationInfo.classList.remove('error');
+            locationText.innerHTML = `📍 Obteniendo tu ubicación... <button class="location-refresh-btn" onclick="obtenerUbicacion()">🔄 Actualizar</button>`;
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    userLat = position.coords.latitude;
+                    userLng = position.coords.longitude;
+
+                    const distanciaAlCamping = calcularDistancia(userLat, userLng, CAMPING_LAT, CAMPING_LNG);
+
+                    locationInfo.classList.remove('error');
+                    locationText.innerHTML = `📍 Estás a <strong>${distanciaAlCamping.toFixed(1)} km</strong> del Camping Pineta <button class="location-refresh-btn" onclick="obtenerUbicacion()">🔄 Actualizar</button>`;
+
+                    pintarTodo();
+                },
+                (error) => {
+                    locationInfo.classList.add('error');
+
+                    let causa = 'Ubicación no disponible';
+                    if (error.code === 1) causa = 'Permiso denegado. Debes activarlo en los ajustes de tu navegador (icono 🔒 o ⓘ junto a la URL → Permisos → Ubicación → Permitir).';
+                    else if (error.code === 2) causa = 'Posición no disponible ahora mismo (¿GPS/ubicación desactivado en el móvil?).';
+                    else if (error.code === 3) causa = 'La ubicación tardó demasiado en responder.';
+
+                    locationText.innerHTML = `📍 Mostrando distancias desde Camping Pineta. <em>(${causa})</em> <button class="location-refresh-btn" onclick="obtenerUbicacion()">🔄 Reintentar</button>`;
+
+                    pintarTodo();
+                },
+                { timeout: 10000, enableHighAccuracy: false, maximumAge: 60000 }
+            );
+        }
+
+        // Pinta rutas (y pueblos/restaurantes si esa pestaña está activa) con los datos disponibles
+        function pintarTodo() {
+            filtrarRutas();
+            if (document.getElementById('pueblos').classList.contains('active')) crearPueblos();
+            if (document.getElementById('gastronomia').classList.contains('active')) crearGastronomia();
         }
 
         // CALCULAR DISTANCIA
@@ -1579,11 +1682,11 @@
         }
 
         function crearTarjetaRuta(ruta) {
-            let distanciaTexto = `📍 Desde camping: ${ruta.distanciaDesdecamping.toFixed(1)} km`;
+            let distanciaTexto = `📍 <strong style="color: var(--text-muted);">desde camping: ${ruta.distanciaDesdecamping.toFixed(1)} km</strong>`;
             
             if (userLat && userLng) {
                 const distanciaDesdeUsuario = calcularDistancia(userLat, userLng, ruta.lat, ruta.lng);
-                distanciaTexto = `📍 <span class="distance-from-you">${distanciaDesdeUsuario.toFixed(1)} km desde ti</span><br><span class="distance-from-camping">desde camping: ${ruta.distanciaDesdecamping.toFixed(1)} km</span>`;
+                distanciaTexto = `📍 <strong style="color: var(--text-muted);">desde camping: ${ruta.distanciaDesdecamping.toFixed(1)} km</strong> | <strong style="color: var(--accent);">desde ubicación: ${distanciaDesdeUsuario.toFixed(1)} km</strong>`;
             }
 
             const difClass = ruta.dificultad === 'Fácil' ? 'difficulty-easy' : 
@@ -1636,10 +1739,10 @@
             const difClass = ruta.dificultad === 'Fácil' ? 'difficulty-easy' : 
                            ruta.dificultad === 'Moderada' ? 'difficulty-moderate' : 'difficulty-hard';
 
-            let distanciaTexto = `📍 Desde camping: ${ruta.distanciaDesdecamping.toFixed(1)} km`;
+            let distanciaTexto = `📍 <strong style="color: var(--text-muted);">desde camping: ${ruta.distanciaDesdecamping.toFixed(1)} km</strong>`;
             if (userLat && userLng) {
                 const distanciaDesdeUsuario = calcularDistancia(userLat, userLng, ruta.lat, ruta.lng);
-                distanciaTexto = `📍 <strong>${distanciaDesdeUsuario.toFixed(1)} km desde tu ubicación</strong> (desde camping: ${ruta.distanciaDesdecamping.toFixed(1)} km)`;
+                distanciaTexto = `📍 <strong style="color: var(--text-muted);">desde camping: ${ruta.distanciaDesdecamping.toFixed(1)} km</strong> | <strong style="color: var(--accent);">desde ubicación: ${distanciaDesdeUsuario.toFixed(1)} km</strong>`;
             }
 
             const rutaReviews = obtenerReviewsRuta(ruta.id);
@@ -1839,9 +1942,9 @@
                 : '<div class="empty-state"><p>No hay rutas que coincidan con tus filtros</p></div>';
         }
 
-        // Inicializar
+        // Inicializar: pintamos ya con distancias desde camping, y actualizamos en cuanto llegue la ubicación
+        filtrarRutas();
         obtenerUbicacion();
-        document.getElementById('routesContainer').innerHTML = rutas.map(r => crearTarjetaRuta(r)).join('');
 
         // Cerrar modal al clickear fuera
         document.getElementById('modal').addEventListener('click', function(e) {
