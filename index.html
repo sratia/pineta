@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Guía Camping Pineta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -27,8 +30,10 @@
             --danger-bg: #FEF2F2;
             --warning: #D97706;
             --warning-bg: #FFFBEB;
-            --radius: 14px;
+            --radius: 16px;
             --radius-sm: 10px;
+            --shadow: 0 4px 16px rgba(30,41,59,0.06);
+            --shadow-hover: 0 10px 28px rgba(30,41,59,0.12);
         }
 
         html, body {
@@ -38,10 +43,10 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
             background: var(--lighter);
             color: var(--dark);
-            line-height: 1.5;
+            line-height: 1.55;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -63,7 +68,7 @@
         .header {
             background: var(--primary);
             color: white;
-            padding: 1.75rem 1.5rem;
+            padding: 2rem 1.5rem 1.75rem;
             text-align: center;
         }
 
@@ -83,7 +88,7 @@
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 0.35rem;
-            letter-spacing: -0.2px;
+            letter-spacing: -0.3px;
         }
 
         .header p {
@@ -138,7 +143,7 @@
             display: flex;
             align-items: center;
             gap: 0.4rem;
-            padding: 0.55rem 0.9rem;
+            padding: 0.6rem 1rem;
             background: none;
             border: none;
             border-radius: 999px;
@@ -155,26 +160,27 @@
         }
 
         .tab-btn:active {
-            opacity: 0.7;
+            transform: scale(0.96);
         }
 
         .tab-btn.active {
             color: white;
             background: var(--primary);
+            font-weight: 700;
         }
 
         /* FILTROS */
         .filters {
             background: white;
             padding: 1.25rem;
-            margin: 1rem 0 0 0;
-            border-radius: 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+            margin: 1rem 1rem 0;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            width: 100%;
+            width: auto;
         }
 
         .filter-group {
@@ -341,8 +347,8 @@
             background: white;
             border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: 0 1px 2px rgba(15,23,42,0.06);
-            transition: all 0.2s ease;
+            box-shadow: var(--shadow);
+            transition: all 0.25s ease;
             display: flex;
             flex-direction: column;
             height: 100%;
@@ -350,13 +356,30 @@
         }
 
         .card:active {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(15,23,42,0.1);
+            transform: translateY(-3px) scale(0.99);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-photo {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+            background: var(--light);
+        }
+
+        .modal-photo {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            border-radius: var(--radius-sm);
+            margin-bottom: 1rem;
         }
 
         .card-header {
             background: var(--light);
-            padding: 1.4rem 1rem;
+            padding: 1.5rem 1rem;
             color: var(--primary);
             text-align: center;
             min-height: 110px;
@@ -367,24 +390,27 @@
         }
 
         .card-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
             background: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.65rem;
             font-size: 1.5rem;
             color: var(--accent);
-            box-shadow: 0 1px 2px rgba(15,23,42,0.08);
+        }
+
+        .icon-waterfall, .icon-loop, .icon-valley, .icon-peak, .icon-lake, .icon-pueblo, .icon-food {
+            color: var(--primary);
         }
 
         .card-title {
             font-size: 1rem;
             font-weight: 700;
             margin-bottom: 0.3rem;
-            line-height: 1.2;
+            line-height: 1.25;
             color: var(--dark);
         }
 
@@ -513,7 +539,7 @@
             background: var(--accent);
             color: white;
             border: none;
-            padding: 0.8rem 1rem;
+            padding: 0.85rem 1.2rem;
             border-radius: var(--radius-sm);
             font-weight: 600;
             font-size: 0.85rem;
@@ -530,13 +556,14 @@
 
         .btn-maps:active {
             background: var(--accent-dark);
-            transform: translateY(1px);
+            transform: translateY(1px) scale(0.98);
         }
 
         .btn-share {
             background: white;
             color: var(--primary);
-            border: 1px solid var(--border);
+            border: 1.5px solid var(--border);
+            box-shadow: none;
         }
 
         .btn-share:active {
@@ -547,7 +574,7 @@
             background: var(--primary);
             color: white;
             border: none;
-            padding: 0.8rem 1rem;
+            padding: 0.85rem 1.2rem;
             border-radius: var(--radius-sm);
             font-weight: 600;
             font-size: 0.85rem;
@@ -560,7 +587,7 @@
 
         .btn-detail:active {
             opacity: 0.85;
-            transform: translateY(1px);
+            transform: translateY(1px) scale(0.98);
         }
 
         /* INFO BOX */
@@ -1142,6 +1169,25 @@
             const name = ICON_PATHS[nameOrEmoji] ? nameOrEmoji : (EMOJI_TO_ICON[nameOrEmoji] || 'mountain');
             return `<svg class="icon${extraClass ? ' ' + extraClass : ''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON_PATHS[name]}</svg>`;
         }
+
+        // Convierte un nombre en un nombre de archivo seguro (sin acentos, espacios, etc.)
+        function slugify(texto) {
+            return texto
+                .toString()
+                .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // quita acentos
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+        }
+
+        // Clase de color del icono según el tipo de ruta (más visual y amigable)
+        const TYPE_ICON_CLASS = {
+            'Cascadas': 'icon-waterfall',
+            'Circular': 'icon-loop',
+            'Valle': 'icon-valley',
+            'Pico': 'icon-peak',
+            'Ibón': 'icon-lake'
+        };
 
         // CAMPING PINETA COORDINATES
         const CAMPING_LAT = 42.6100;
@@ -1921,8 +1967,9 @@
 
             return `
                 <div class="card" onclick="abrirDetalle(${ruta.id})">
+                    <img class="card-photo" src="images/rutas/${slugify(ruta.name)}.jpg" alt="${ruta.name}" loading="lazy" onerror="this.remove()">
                     <div class="card-header">
-                        <div class="card-icon">${ic(ruta.icon)}</div>
+                        <div class="card-icon ${TYPE_ICON_CLASS[ruta.type] || ''}">${ic(ruta.icon)}</div>
                         <div class="card-title">${ruta.name}</div>
                         <div class="card-type">${ruta.type}</div>
                     </div>
@@ -1969,8 +2016,9 @@
             const promedioReviews = rutaReviews.length > 0 ? (rutaReviews.reduce((a, b) => a + b, 0) / rutaReviews.length).toFixed(1) : 'Sin reseñas';
 
             const html = `
+                <img class="modal-photo" src="images/rutas/${slugify(ruta.name)}.jpg" alt="${ruta.name}" loading="lazy" onerror="this.remove()">
                 <div class="modal-header">
-                    <div class="modal-icon">${ic(ruta.icon)}</div>
+                    <div class="modal-icon ${TYPE_ICON_CLASS[ruta.type] || ''}">${ic(ruta.icon)}</div>
                     <div class="modal-title">${ruta.name}</div>
                 </div>
                 <div class="modal-distance">${distanciaTexto}</div>
@@ -2068,8 +2116,9 @@
                 }
                 return `
                 <div class="card">
+                    <img class="card-photo" src="images/pueblos/${slugify(p.name)}.jpg" alt="${p.name}" loading="lazy" onerror="this.remove()">
                     <div class="card-header">
-                        <div class="card-icon">${ic(p.icon)}</div>
+                        <div class="card-icon icon-pueblo">${ic(p.icon)}</div>
                         <div class="card-title">${p.name}</div>
                     </div>
                     <div class="card-body">
@@ -2113,8 +2162,9 @@
                 }
                 return `
                 <div class="card" style="margin-bottom: 1rem;">
+                    <img class="card-photo" src="images/restaurantes/${slugify(r.nombre)}.jpg" alt="${r.nombre}" loading="lazy" onerror="this.remove()">
                     <div class="card-header" style="min-height: auto; padding: 1rem; flex-direction: row; gap: 0.75rem; justify-content: flex-start; text-align: left;">
-                        <div class="card-icon" style="margin-bottom: 0;">${ic(r.icon)}</div>
+                        <div class="card-icon icon-food" style="margin-bottom: 0;">${ic(r.icon)}</div>
                         <div>
                             <div class="card-title">${r.nombre}</div>
                             <div class="card-type">${r.location}</div>
